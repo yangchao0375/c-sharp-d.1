@@ -1,4 +1,4 @@
-﻿using OrderManagement;
+using OrderManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +20,10 @@ namespace c_sharp_d._1
             Client c1 = new Client("c01");
 
             //生成订单项
-            OrderItem odi1 = new OrderItem("订单一", p1, 1);
-            OrderItem odi2 = new OrderItem("订单二", p2, 2);
-            OrderItem odi3 = new OrderItem("订单三", p3, 3);
-            OrderItem odi4 = new OrderItem("订单四", p2, 4);
+            OrderItem odi1 = new OrderItem("Item1", p1, 1);
+            OrderItem odi2 = new OrderItem("Item2", p2, 2);
+            OrderItem odi3 = new OrderItem("Item3", p3, 3);
+            OrderItem odi4 = new OrderItem("Item4", p2, 4);
 
 
             //生成订单项列表
@@ -48,34 +48,23 @@ namespace c_sharp_d._1
             //生成订单服务对象
             OrderService ods = new OrderService(orders);
 
+
             //添加订单测试
-            Console.WriteLine("【添加订单测试】");
+            Console.WriteLine("添加订单测试");
             try
             {
                 ods.AddOrder(od1);
                 //ods.AddOrder(od1);
                 ods.AddOrder(od2);
                 ods.AddOrder(od3);
+                Console.WriteLine("添加订单成功");
             }
             catch (Exception e)
             {
                 Console.WriteLine("添加订单失败！原因：" + e.Message);
             }
-
-            //删除订单测试
-            Console.WriteLine("【删除订单测试】");
-            try
-            {
-                ods.DeleteOrder(od2);
-                //ods.DeleteOrder(od3);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("删除订单失败！原因：" + e.Message);
-            }
-
             //查询订单测试
-            Console.WriteLine("【查询订单测试】");
+            Console.WriteLine("查询订单测试");
 
             IEnumerable<Order> q1 = ods.SearchOrder(1, "o02");
             foreach (Order od in q1) Console.WriteLine(od);
@@ -83,9 +72,24 @@ namespace c_sharp_d._1
             IEnumerable<Order> q2 = ods.SearchOrder(2, "橙子");
             foreach (Order od in q2) Console.WriteLine(od);
 
+            //删除订单测试
+            Console.WriteLine("删除订单2测试");
+            try
+            {
+                ods.DeleteOrder(od2);
+                //ods.DeleteOrder(od3);
+                Console.WriteLine("删除订单成功");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("删除订单失败！原因：" + e.Message);
+            }
+
+            
+
 
             //排序测试
-            Console.WriteLine("【排序测试】");
+            Console.WriteLine("排序测试");
             ods.SortOrder();
             foreach (Order od in ods.orders) Console.WriteLine(od);
             ods.SortOrder((a1, a2) => Convert.ToInt32(a1.TotalPrice - a2.TotalPrice));
@@ -94,5 +98,8 @@ namespace c_sharp_d._1
         } 
      }
     }
+
+
+
 
 
